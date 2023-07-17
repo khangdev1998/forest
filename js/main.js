@@ -1,4 +1,14 @@
 $(document).ready(function () {
+  $(".btnMenu").click(function (e) {
+    $(".header__menu").addClass("active");
+    fullpage_api.setAllowScrolling(false);
+
+    $(".header__menu-close").click(function () {
+      $(".header__menu").removeClass("active");
+      fullpage_api.setAllowScrolling(true);
+    });
+  });
+
   // Handle Click Move tab
   const tabItem = $(".news__tab-item");
   const tabContent = $(".news__content-pane");
@@ -103,12 +113,13 @@ $(document).ready(function () {
     autoplayHoverPause: true,
     responsive: {
       0: {
-        items: 1,
+        items: 2,
+        margin: 12,
       },
       600: {
-        items: 3,
+        items: 4,
       },
-      1000: {
+      1025: {
         items: 7,
       },
     },
@@ -116,6 +127,23 @@ $(document).ready(function () {
 
   // Scroll Page Effect Section
   $("#fullpage").fullpage({
+    afterRender: function () {
+      $(".slider-main").owlCarousel({
+        items: 1,
+        loop: true,
+        margin: 0,
+        nav: false,
+        dots: false,
+        margin: 0,
+        autoplaySpeed: 1500,
+        autoplay: false,
+        smartSpeed: 850,
+        autoplayHoverPause: true,
+        autoplayTimeout: 4800,
+      });
+    },
+    autoScrolling: true,
+    scrollHorizontally: true,
     anchors: [
       "section1",
       "section2",
@@ -126,15 +154,80 @@ $(document).ready(function () {
       "section7",
     ],
     afterLoad: function (origin, destination, direction) {
+      // Hanld Count Number
       if (destination.anchor == "section2") {
         countNumbers();
       }
+
+      // Handle Show Menu Scroll Page
+      if (destination.index >= 1) {
+        $(".menu").addClass("active");
+        $(".header").fadeOut();
+      } else {
+        $(".menu").removeClass("active");
+        $(".header").fadeIn();
+      }
     },
-    navigation: true, // để bật navigation dots
-    navigationPosition: "right", // để đặt vị trí của navigation dots (bên phải hoặc bên trái)
-    navigationTooltips: ["HEADER", "VIETNAM FOREST RESOURCES MUSEUM", "EXHIBITION ROOM", "NEWS", "SUPPORT FOR VISITORS", "LIBRARY", "FOOTER"], // để thêm các tooltips cho từng dot
-    showActiveTooltip: true, // để hiển thị tooltips cho dot hiện tại,
+    navigation: true,
+    navigationPosition: "right",
+    navigationTooltips: [
+      "HEADER",
+      "VIETNAM FOREST RESOURCES MUSEUM",
+      "EXHIBITION ROOM",
+      "NEWS",
+      "SUPPORT FOR VISITORS",
+      "LIBRARY",
+      "FOOTER",
+    ],
+    showActiveTooltip: true,
     responsiveWidth: 1599,
-    afterResponsive: function (isResponsive) {},
+    responsiveHeight: null,
+    afterResponsive: function (isResponsive) {
+      var sections = document.querySelectorAll(".section:not(:first-child)");
+
+      if (isResponsive) {
+        for (var i = 0; i < sections.length; i++) {
+          sections[i].style.padding = "68px 0";
+        }
+      } else {
+        for (var i = 0; i < sections.length; i++) {
+          sections[i].style.padding = null;
+        }
+      }
+    },
+  });
+
+  // Gọi fullpage_api.reBuild() sau khi trang đã tải
+  fullpage_api.reBuild();
+
+  $(".marquee__main").marquee({
+    duration: 25000,
+    delayBeforeStart: 0,
+    direction: "right",
+    duplicated: true,
+    pauseOnHover: true,
+  });
+
+  // Check Validation Email footer
+  $(".footer__wrapper-form a").click(function (event) {
+    event.preventDefault();
+
+    const email = $('.footer__wrapper-form input[type="email"]');
+
+    if (!email.val()) {
+      alert("Vui lòng không để trống trường này !");
+      return false;
+    }
+
+    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+    if (!emailRegex.test(email.val())) {
+      alert("Trường này phải là một email hợp lệ !");
+      return false;
+    }
+
+    alert(
+      "Gửi thông tin thành công. Chúng tôi sẽ liên hệ với bạn qua thông tin bạn đã cung cấp. Xin cảm ơn !"
+    );
+    email.val("");
   });
 });

@@ -6,9 +6,10 @@
     <title>BẢO TÀNG TÀI NGUYÊN RỪNG VIỆT NAM</title>
     <link rel="stylesheet" href="./css/home.css" />
     <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -29,10 +30,45 @@
     />
   </head>
   <body>
+    <!-- <div class="menu">
+      <div class="container">
+        <div class="menu__wrapper">
+          <a href="index.html" class="menu__wrapper-logo">
+            <img src="./images/logo.png" alt="this-is-logo" />
+          </a>
+
+          <img src="./images/bars.svg" alt="" class="btnMenu2" />
+          <div class="menu__wrapper-list">
+            <img class="menu__wrapper-close" src="./images/left.svg" alt="this-is-icon">
+            <ul>
+              <li>
+                <a href="#!">About</a>
+              </li>
+              <li>
+                <a href="#!">News</a>
+              </li>
+              <li>
+                <a href="#!">Exhibitions</a>
+              </li>
+              <li>
+                <a href="#!">Museum library</a>
+              </li>
+              <li>
+                <a href="#!">Visitor support</a>
+              </li>
+              <li>
+                <a href="#!">Database</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
     <div id="fullpage">
       <div class="section">
-        <div class="background">
-          <div class="topbar">
+        <div class="wrapper-second">
+          <div id="myTopbar" class="topbar">
             <div class="container">
               <div class="topbar__wrapper">
                 <div class="topbar__info">
@@ -40,7 +76,7 @@
                     <li class="topbar__info-item">
                       <img
                         class="topbar__info-img"
-                        src="./images/clock.png"
+                        src="./images/topbar-clock.png"
                         alt="this-is-icon"
                       />
                       <b>OPENING HOURS:</b>Monday to Friday From 8:00 am to 4:30
@@ -103,61 +139,167 @@
             </div>
           </div>
           <div class="header container">
-            <div class="header__container">
+            <div id="header" class="header__container">
               <a href="index.html" class="header__logo">
                 <img src="./images/logo.png" alt="this-is-logo" />
               </a>
-              <ul class="header__menu">
-                <li>
-                  <a href="#!"
-                    ><img
-                      src="./images/menu-icon-1.png"
-                      alt="this-is-icon"
-                    />About</a
-                  >
-                </li>
-                <li>
-                  <a href="#!"
-                    ><img
-                      src="./images/menu-icon-2.png"
-                      alt="this-is-icon"
-                    />News</a
-                  >
-                </li>
-                <li>
-                  <a href="#!"
-                    ><img
-                      src="./images/menu-icon-3.png"
-                      alt="this-is-icon"
-                    />Exhibitions</a
-                  >
-                </li>
-                <li>
-                  <a href="#!"
-                    ><img
-                      src="./images/menu-icon-4.png"
-                      alt="this-is-icon"
-                    />Museum library</a
-                  >
-                </li>
-                <li>
-                  <a href="#!"
-                    ><img
-                      src="./images/menu-icon-5.png"
-                      alt="this-is-icon"
-                    />Visitor support</a
-                  >
-                </li>
-                <li>
-                  <a href="#!"
-                    ><img
-                      src="./images/menu-icon-6.png"
-                      alt="this-is-icon"
-                    />Database</a
-                  >
-                </li>
-              </ul>
+              <img src="./images/bars.svg" alt="" class="btnMenu" />
+              <div class="header__menu">
+                <i class="header__menu-close fas fa-times"></i>
+
+
+                <ul class="header__menu-list">
+                  <li>
+                    <a href="#!"
+                      ><img
+                        src="./images/menu-icon-1.png"
+                        alt="this-is-icon"
+                      />About</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#!"
+                      ><img
+                        src="./images/menu-icon-2.png"
+                        alt="this-is-icon"
+                      />News</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#!"
+                      ><img
+                        src="./images/menu-icon-3.png"
+                        alt="this-is-icon"
+                      />Exhibitions</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#!"
+                      ><img
+                        src="./images/menu-icon-4.png"
+                        alt="this-is-icon"
+                      />Museum library</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#!"
+                      ><img
+                        src="./images/menu-icon-5.png"
+                        alt="this-is-icon"
+                      />Visitor support</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#!"
+                      ><img
+                        src="./images/menu-icon-6.png"
+                        alt="this-is-icon"
+                      />Database</a
+                    >
+                  </li>
+                </ul>
+              </div>
             </div>
+          </div>
+        </div>
+        <div class="slider-main owl-carousel owl-theme">
+          <div class="item">
+            <img
+              src="https://vnfm.vn/pic/banner/slider-1_1616_hasthumb_7959_HasThumb.jpg"
+              alt=""
+            />
+            <div class="slider-main__content">
+              Bảo tàng tài nguyên rừng Việt Nam
+              <br />
+              Vietnam Forest Museum VFM
+            </div>
+            <a class="slider-main__link" href="#!"
+              >Khám phá ngay <i class="fa fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="item">
+            <img
+              src="https://vnfm.vn/pic/banner/slider-1_1616_hasthumb_7959_HasThumb.jpg"
+              alt=""
+            />
+            <div class="slider-main__content">
+              Bảo tàng tài nguyên rừng Việt Nam
+              <br />
+              Vietnam Forest Museum VFM
+            </div>
+            <a class="slider-main__link" href="#!"
+              >Khám phá ngay <i class="fa fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="item">
+            <img
+              src="https://vnfm.vn/pic/banner/slider-1_1616_hasthumb_7959_HasThumb.jpg"
+              alt=""
+            />
+            <div class="slider-main__content">
+              Bảo tàng tài nguyên rừng Việt Nam
+              <br />
+              Vietnam Forest Museum VFM
+            </div>
+            <a class="slider-main__link" href="#!"
+              >Khám phá ngay <i class="fa fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="item">
+            <img
+              src="https://vnfm.vn/pic/banner/slider-1_1616_hasthumb_7959_HasThumb.jpg"
+              alt=""
+            />
+            <div class="slider-main__content">
+              Bảo tàng tài nguyên rừng Việt Nam
+              <br />
+              Vietnam Forest Museum VFM
+            </div>
+            <a class="slider-main__link" href="#!"
+              >Khám phá ngay <i class="fa fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+        <div class="marquee">
+          <a href="#!" class="marquee__title"
+            ><i class="fa-regular fa-star"></i> Tin tức nổi bật</a
+          >
+          <div class="marquee__main">
+            <ul class="marquee__main-list">
+              <li>
+                <a href="#!">
+                  <i class="fas fa-angles-right"></i>
+                  Thứ trưởng bộ Nông nghiệp và phát triển nông thôn Phùng Đức
+                  Tiến thăm và làm việc tại Bảo tàng Tài nguyên rừng Việt Nam</a
+                >
+              </li>
+              <li>
+                <a href="#!">
+                  <i class="fas fa-angles-right"></i>
+                  Hưởng ứng Giờ Trái Đất - 20:30 ngày 25.03.2023</a
+                >
+              </li>
+              <li>
+                <a href="#!">
+                  <i class="fas fa-angles-right"></i>
+                  Ngày Trái Đất 2023 – Earth Day 2023 2</a
+                >
+              </li>
+              <li>
+                <a href="#!">
+                  <i class="fas fa-angles-right"></i>
+                  Đại hội Công đoàn Bảo tàng Tài nguyên rừng khoá III, nhiệm kì
+                  2023 -2028</a
+                >
+              </li>
+              <li>
+                <a href="#!">
+                  <i class="fas fa-angles-right"></i>
+                  Đại hội Công đoàn Viện Điều tra Quy hoạch Rừng lần thứ XVIII,
+                  nhiệm kỳ 2023-2028</a
+                >
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -170,37 +312,41 @@
             </h1>
             <img src="./images/forest-border.png" alt="" />
             <p class="forest__description">
-              The museum has been keeping a set of specimens on forest resources
-              including: Animals (with a variety of classes: birds, mammals,
-              reptiles, amphibians, ...), plants and insects. Collected from all
-              regions of the country, with many rare and endangered species
-              listed in the Vietnam Red Book. They are carefully preserved and
-              kept in a building with an area of ​​more than one thousand square
-              meters. The Vietnam Forest Resources Museum not only has that
-              precious dry specimen set but also a living resource specimen set.
-              It is a botanical garden of over 3 hectares attached to the
-              Museum's Gallery. The garden is full of plant species typical for
-              the typical forest types of our country. With the diversity and
-              abundance of natural resources bestowed, the Vietnam Forest
-              Resources Museum is like a miniature forest located in the heart
-              of the capital.
+              Bảo tàng đã và đang lưu giữ Bộ mẫu vật về tài nguyên rừng gồm:
+              Động vật (với đa dạng các lớp: chim, thú, bò sát, lưỡng cư,…),
+              thực vật và côn trùng. Được thu thập từ khắp các vùng miền trên cả
+              nước, với nhiều loài quý hiếm có nguy cơ bị tuyệt chủng được ghi
+              tên trong sách đỏ Việt Nam. Chúng được bảo quản và lưu giữ cẩn
+              thận trong tòa nhà với diện tích hơn một ngàn mét vuông. Bảo tàng
+              Tài nguyên rừng Việt Nam không chỉ có Bộ mẫu vật khô quý giá đó mà
+              còn có một Bộ mẫu vật về tài nguyên sống. Đó chính là khu vườn
+              thực vật rộng trên 3ha được gắn liền với Nhà trưng bày của Bảo
+              tàng. Khu vườn có đầy đủ các loài thực vật đặc trưng cho các kiểu
+              rừng điển hình của nước ta. Với sự đa dạng và phong phú của tài
+              nguyên thiên nhiên ban tặng, Bảo tàng Tài nguyên rừng Việt Nam như
+              một khu rừng thu nhỏ nằm giữa lòng Thủ đô chắc chắn sẽ để lại ấn
+              tượng khó phai cho những ai đã từng đến nơi đây.
             </p>
             <div class="forest__count">
               <div class="forest__count-item">
                 <img src="./images/forest-1.png" alt="this-is-icon" />
                 <span class="counter" data-count="2000"></span>
+                <p>Diện tích</p>
               </div>
               <div class="forest__count-item">
                 <img src="./images/forest-2.png" alt="this-is-icon" />
                 <span class="counter" data-count="100"></span>
+                <p>Loài thực vật</p>
               </div>
               <div class="forest__count-item">
                 <img src="./images/forest-3.png" alt="this-is-icon" />
                 <span class="counter" data-count="150"></span>
+                <p>Loài động vật</p>
               </div>
               <div class="forest__count-item">
                 <img src="./images/forest-4.png" alt="this-is-icon" />
-                <span class="counter" data-count="450"></span>
+                <span class="counter" data-count="200"></span>
+                <p>Khách tham quan</p>
               </div>
             </div>
             <a href="#!" class="button button--first"
@@ -593,63 +739,89 @@
               >
             </h2>
             <div class="support__wrapper">
-              <div class="support__wrapper-column">
-                <a class="support__wrapper-link" href="#!">
-                  <img
-                    class="support__wrapper-image"
-                    src="./images/support-1.jpg"
-                    alt="this-is-image"
-                  />
-                  <div class="support__wrapper-test">
-                    <div class="support__wrapper-content">
-                      <h3 class="support__wrapper-title">
-                        Trưng bày <span>Động vật</span>
-                      </h3>
-                      <a href="#!" class="button button--third"
-                        >Xem chi tiết
-                        <img src="./images/more-right.png" alt="this-is-icon"
-                      /></a>
-                    </div>
+              <div class="support__column">
+                <div class="support__column-main">
+                  <div class="support__column-image">
+                    <a class="support__column-link" href="#!">
+                      <img src="./images/support-1.jpg" alt="this-is-image" />
+                    </a>
                   </div>
-                </a>
-              </div>
-              <div class="support__wrapper-column support__wrapper-column--bg">
-                <div class="support__wrapper-main">
-                  <div class="support__wrapper-clock">
-                    <img src="./images/clock.png" alt="this-is-icon" />
+
+                  <div
+                    class="support__column-content support__column-content--first"
+                  >
+                    <a href="#!">
+                      Trưng bày
+                      <span>Động vật</span>
+                    </a>
+                    <a class="button button--third" href="#!">
+                      Xem chi tiết
+                      <img src="./images/more-right.png" alt="this-is-icon" />
+                    </a>
                   </div>
-                  <h1>Giờ tham quan</h1>
-                  <h2>Từ 08h00 đến 17h00</h2>
-                  <span
-                    ><b>Thời gian:</b> Từ 08h 00 đến 17h00 Từ thứ Hai đến thứ
-                    Sáu
-                  </span>
-                  <span
-                    ><b>Địa chỉ:</b> Km 12+300 Ngọc Hồi. Viện Điều tra Quy hoạch
-                    rừng, Vĩnh Quỳnh, Thanh Trì, Hà Nội
-                  </span>
                 </div>
               </div>
-              <div class="support__wrapper-column">
-                <a href="#!" class="support__wrapper-link">
-                  <img
-                    class="support__wrapper-image"
-                    src="./images/support-2.jpg"
-                    alt="this-is-image"
-                  />
-                  <div class="support__wrapper-icon">
-                    <i class="fas fa-play-circle"></i>
+
+              <div class="support__column">
+                <div class="support__column-group">
+                  <div class="support__column-box">
+                    <div class="support__column-clock">
+                      <img
+                        src="./images/support-clock.png"
+                        alt="this-is-icon"
+                      />
+                    </div>
+                    <h2>Giờ tham quan</h2>
+                    <h3>Từ 08h00 đến 17h00</h3>
+
+                    <span
+                      ><b>Thời gian:</b> Từ 08h 00 đến 17h00 Từ thứ Hai đến thứ
+                      Sáu</span
+                    >
+                    <div class="support__column-line"></div>
+                    <span
+                      ><b>Địa chỉ:</b> Km 12+300 Ngọc Hồi. Viện Điều tra Quy
+                      hoạch rừng, Vĩnh Quỳnh, Thanh Trì, Hà Nội</span
+                    >
                   </div>
-                  <span> Giới thiệu về Bảo tàng Tài nguyên rừng Việt Nam </span>
-                </a>
-                <a href="#!" class="support__wrapper-link">
-                  <img
-                    class="support__wrapper-image"
-                    src="./images/support-2.jpg"
-                    alt="this-is-image"
-                  />
-                  <span> Giới thiệu về Bảo tàng Tài nguyên rừng Việt Nam </span>
-                </a>
+                </div>
+              </div>
+
+              <div class="support__column support__column--last">
+                <div class="support__column-half">
+                  <div class="support__column-main">
+                    <div class="support__column-image">
+                      <a class="support__column-link" href="#!">
+                        <img src="./images/support-2.jpg" alt="this-is-image" />
+                      </a>
+                    </div>
+                    <div
+                      class="support__column-content support__column-content--second"
+                    >
+                      <span class="support__column-icon"
+                        ><i class="fas fa-play-circle"></i
+                      ></span>
+                      <a href="#!"
+                        >Giới thiệu về Bảo tàng Tài nguyên rừng Việt Nam</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="support__column-half">
+                  <div class="support__column-main">
+                    <div class="support__column-image">
+                      <a class="support__column-link" href="#!">
+                        <img src="./images/support-3.jpg" alt="this-is-image" />
+                      </a>
+                    </div>
+                    <div
+                      class="support__column-content support__column-content--third"
+                    >
+                      <a href="#!"> Trưng bày </a>
+                      <span>Động vật</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -659,6 +831,11 @@
         <div class="library">
           <div class="container">
             <h2 class="heading heading--light">Library</h2>
+            <p class="library__desc">
+              Bảo tàng đã và đang lưu giữ Bộ mẫu vật về tài nguyên rừng gồm:
+              Động vật (với đa dạng các lớp: chim, thú, bò sát, lưỡng cư,…),
+              thực vật và côn trùng
+            </p>
             <div class="library__wrapper">
               <a href="#!" class="library__wrapper-item">
                 <img
@@ -673,7 +850,7 @@
                     alt="this-is-icon"
                   />
                   <h1 class="library__wrapper-text">
-                    Museum introduction video
+                    VIDEO GIỚI THIỆU BẢO TÀNG
                   </h1>
                 </div>
               </a>
@@ -690,7 +867,7 @@
                     alt="this-is-icon"
                   />
                   <h1 class="library__wrapper-text">
-                    The museum's introduction image
+                    HÌNH ẢNH GIỚI THIỆU BẢO TÀNG
                   </h1>
                 </div>
               </a>
@@ -706,7 +883,9 @@
                     src="./images/library-icon-3.png"
                     alt="this-is-icon"
                   />
-                  <h1 class="library__wrapper-text">Museum brochure</h1>
+                  <h1 class="library__wrapper-text">
+                    TÀI LIỆU GIỚI THIỆU BẢO TÀNG
+                  </h1>
                 </div>
               </a>
             </div>
@@ -767,6 +946,16 @@
                   loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"
                 ></iframe>
+              </div>
+              <div class="footer__wrapper-item">
+                <h1 class="footer__wrapper-title">SIGN UP TO GET NEWS</h1>
+                <span class="footer__wrapper-desc"
+                  >Enter your email to receive the latest Museum announcements
+                </span>
+                <div class="footer__wrapper-form">
+                  <input type="email" placeholder="Enter your email" />
+                  <a href="#!">Send</a>
+                </div>
               </div>
               <div class="footer__wrapper-item">
                 <h1 class="footer__wrapper-title">CONNECT WITH THE MUSEUM</h1>
@@ -893,10 +1082,11 @@
         <i class="fas fa-chevron-up"></i>
       </div>
     </div>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullpage.js@3/dist/fullpage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.Marquee/1.5.0/jquery.marquee.min.js"></script>
     <script src="/js/main.js"></script>
   </body>
 </html>
