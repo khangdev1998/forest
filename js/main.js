@@ -1,13 +1,78 @@
 $(document).ready(function () {
-  $(".btnMenu").click(function (e) {
-    $(".header__menu").addClass("active");
-    fullpage_api.setAllowScrolling(false);
-
-    $(".header__menu-close").click(function () {
-      $(".header__menu").removeClass("active");
-      fullpage_api.setAllowScrolling(true);
-    });
+  // Adding click listener to the overlay and close icon
+  $(document).on("click", ".btnMenu, .btnMenu2", function (e) {
+    showMenu();
   });
+  $(document).on("click", "#overlay, .menuMobile__close", function () {
+    $("#menuMobile").removeClass("show");
+    $("#overlay").removeClass("show");
+  });
+
+  function showMenu() {
+    let menu = $("#menuMobile");
+
+    if (menu.length === 0) {
+      menu = $("<div>", { id: "menuMobile" }).appendTo("body");
+      $("<div>", { id: "overlay" }).appendTo("body");
+      menu.css("transform", "translateX(-100%)");
+
+      menu.html(`
+        <div id="menuContent">
+            <i class="menuMobile__close fas fa-times"></i>
+            <ul class="menuMobile__list">
+                <li>
+                    <a href="#!">
+                        <img src="./images/menu-icon-1.png" alt="this-is-icon" />About
+                    </a>
+                </li>
+                <li>
+                    <a href="#!">
+                        <img src="./images/menu-icon-2.png" alt="this-is-icon" />News
+                    </a>
+                </li>
+                <li>
+                    <a href="#!">
+                        <img src="./images/menu-icon-3.png" alt="this-is-icon" />EXHIBITIONS
+                    </a>
+                </li>
+                <li>
+                    <a href="#!">
+                        <img src="./images/menu-icon-4.png" alt="this-is-icon" />MUSEUM LIBRARY
+                    </a>
+                </li>
+                <li>
+                        <a href="#!">
+                            <img src="./images/menu-icon-5.png" alt="this-is-icon" />VISITOR SUPPORT
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            <img src="./images/menu-icon-6.png" alt="this-is-icon" />DATABASE
+                        </a>
+                    </li>
+                </ul>
+            </div>`);
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          menu.addClass("show");
+          $("#overlay").addClass("show");
+          $("html").css("overflow-y", "hidden");
+        });
+      });
+
+      // Handle Close Menu & Overlay
+      $(".menuMobile__close, #overlay").on("click", function () {
+        menu.removeClass("show");
+        $("#overlay").removeClass("show");
+        $("html").css("overflow-y", "auto");
+      });
+    } else {
+      menu.toggleClass("show");
+      $("#overlay").toggleClass("show");
+      $("html").css("overflow-y", "hidden");
+    }
+  }
 
   // Handle Click Move tab
   const tabItem = $(".news__tab-item");
@@ -133,8 +198,8 @@ $(document).ready(function () {
         loop: true,
         margin: 0,
         nav: false,
-        dots: false,
         margin: 0,
+        dots: true,
         autoplaySpeed: 1500,
         autoplay: false,
         smartSpeed: 850,
@@ -160,12 +225,61 @@ $(document).ready(function () {
       }
 
       // Handle Show Menu Scroll Page
+      const menuHTML = `
+      <div class="menu">
+        <div class="container">
+          <div class="menu__wrapper">
+            <a href="index.html" class="menu__wrapper-logo">
+              <img src="./images/logo.png" alt="this-is-logo" />
+            </a>
+
+            <img src="./images/bars.svg" alt="" class="btnMenu2" />
+            <div class="menu__wrapper-list">
+              <ul>
+                <li>
+                  <a href="#!">About</a>
+                </li>
+                <li>
+                  <a href="#!">News</a>
+                </li>
+                <li>
+                  <a href="#!">Exhibitions</a>
+                </li>
+                <li>
+                  <a href="#!">Museum library</a>
+                </li>
+                <li>
+                  <a href="#!">Visitor support</a>
+                </li>
+                <li>
+                  <a href="#!">Database</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+`;
       if (destination.index >= 1) {
-        $(".menu").addClass("active");
-        $(".header").fadeOut();
+        if ($(".menu").length === 0) {
+          $("body").append(menuHTML);
+        }
+        $(".header")
+          .fadeOut()
+          .promise()
+          .then(function () {
+            $(".menu").addClass("active");
+          });
       } else {
         $(".menu").removeClass("active");
-        $(".header").fadeIn();
+        $(".header")
+          .fadeIn()
+          .promise()
+          .then(function () {
+            if (!$(".menu").hasClass("active")) {
+              $(".menu").remove();
+            }
+          });
       }
     },
     navigation: true,
