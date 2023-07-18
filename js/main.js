@@ -96,33 +96,33 @@ $(document).ready(function () {
     });
   });
 
-  // Handle Scroll window Show Uptop
-  const upTop = $("#up-top");
-  function debounceFn(func, wait, immediate) {
-    let timeout;
-    return function () {
-      let context = this,
-        args = arguments;
-      let later = function () {
-        timeout = null;
-        if (!immediate) func.apply(context, args);
-      };
-      let callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
-    };
-  }
-  $(window).scroll(
-    debounceFn(function () {
-      const scrollY = window.pageYOffset;
-      scrollY > 400 ? upTop.addClass("active") : upTop.removeClass("active");
-    }, 100)
-  );
+  // // Handle Scroll window Show Uptop
+  // const upTop = $("#up-top");
+  // function debounceFn(func, wait, immediate) {
+  //   let timeout;
+  //   return function () {
+  //     let context = this,
+  //       args = arguments;
+  //     let later = function () {
+  //       timeout = null;
+  //       if (!immediate) func.apply(context, args);
+  //     };
+  //     let callNow = immediate && !timeout;
+  //     clearTimeout(timeout);
+  //     timeout = setTimeout(later, wait);
+  //     if (callNow) func.apply(context, args);
+  //   };
+  // }
+  // $(window).scroll(
+  //   debounceFn(function () {
+  //     const scrollY = window.pageYOffset;
+  //     scrollY > 400 ? upTop.addClass("active") : upTop.removeClass("active");
+  //   }, 100)
+  // );
 
-  upTop.click(function () {
-    $("html, body").animate({ scrollTop: 0 }, "slow");
-  });
+  // upTop.click(function () {
+  //   $("html, body").animate({ scrollTop: 0 }, "slow");
+  // });
 
   // Hanld Count Number
   let completed = false;
@@ -222,6 +222,21 @@ $(document).ready(function () {
       // Hanld Count Number
       if (destination.anchor == "section2") {
         countNumbers();
+      }
+      
+      // Handle Up Top Page
+      const upTopButton = $("#up-top");
+      if (destination.index !== 0) {
+        upTopButton.css({
+          opacity: 1,
+          visibility: "visible",
+        });
+
+        upTopButton.on("click", function () {
+          $.fn.fullpage.moveTo(1);
+        });
+      } else {
+        upTopButton.removeAttr("style");
       }
 
       // Handle Show Menu Scroll Page

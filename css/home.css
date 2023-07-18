@@ -166,7 +166,6 @@ html {
 }
 #up-top.active {
   opacity: 1;
-  bottom: 40px;
   visibility: visible;
 }
 #up-top i {
@@ -654,7 +653,7 @@ html {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
   --columns: 4;
   --gap: 20px;
@@ -670,12 +669,16 @@ html {
 .forest__count-item p {
   font-weight: 600;
 }
-.forest__count-item img {
-  border: 1px solid var(--primary-color);
+.forest__count-image {
   --size-item: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: var(--size-item);
   height: var(--size-item);
-  padding: 17px 14px 14px 14px;
+  border: 1px solid var(--primary-color);
+}
+.forest__count-item img {
   -o-object-fit: cover;
   object-fit: cover;
   max-width: 100%;
@@ -843,7 +846,7 @@ html {
 }
 .library__wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   grid-gap: 20px;
 }
 .library__wrapper-item {
@@ -1465,7 +1468,6 @@ html {
   gap: 8px;
   align-items: center;
 }
-
 @media only screen and (max-width: 1599px) {
   .footer__slider .owl-next {
     right: 0;
@@ -1475,11 +1477,28 @@ html {
   }
 }
 @media only screen and (max-width: 1024px) {
+  .section {
+    padding: 40px 0 !important;
+  }
+  .section:first-child {
+    padding: 0 !important;
+  }
+  .btnMenu,
+  .btnMenu2 {
+    display: block;
+  }
   .topbar {
     background-color: #e5e5e5;
   }
   .topbar__wrapper {
     background-color: transparent;
+  }
+  .menu__wrapper-list,
+  .header__menu {
+    display: none;
+  }
+  .wrapper-second {
+    position: unset;
   }
   .header {
     height: 80px;
@@ -1488,12 +1507,12 @@ html {
     max-width: 340px;
     margin-right: 50px;
   }
+  .header__container {
+    align-items: center;
+  }
   .header.container {
     padding: 0;
     background-color: var(--primary-color);
-  }
-  .section:first-child {
-    padding: 0 !important;
   }
   .slider-main__content {
     font-size: 24px;
@@ -1501,9 +1520,6 @@ html {
   }
   .slider-main .item {
     height: auto !important;
-  }
-  .wrapper-second {
-    position: unset;
   }
   .marquee {
     gap: 8px;
@@ -1525,11 +1541,15 @@ html {
   .marquee__title::before {
     border: none;
   }
+  .exhibition__gallery {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .exhibition__item:not(:nth-child(9999)) {
+    grid-column: unset;
+  }
   .news__tab {
     margin: 20px 0;
-  }
-  .section {
-    padding: 40px 0 !important;
   }
   .footer__wrapper {
     grid-template-columns: repeat(2, 1fr);
@@ -1540,6 +1560,14 @@ html {
   }
 }
 @media only screen and (max-width: 1023px) {
+  .topbar__wrapper {
+    flex-direction: column;
+    gap: 20px;
+    padding: 8px 0;
+  }
+  .topbar__info {
+    display: none;
+  }
   .slider-main .owl-dots {
     bottom: 1rem;
   }
@@ -1549,17 +1577,22 @@ html {
   .slider-main__link {
     bottom: 5.4rem;
   }
-  .topbar__wrapper {
-    flex-direction: column;
-    gap: 20px;
-    padding: 8px 0;
-  }
-  .topbar__info {
-    display: none;
-  }
   .topbar__search {
     max-width: 100%;
     width: 100%;
+  }
+  .library__wrapper-icon {
+    position: unset;
+    max-width: 58px;
+  }
+  .library__wrapper-heading {
+    gap: 12px;
+  }
+  .library__wrapper-text {
+    font-size: 18px;
+    text-align: left;
+    max-width: 100%;
+    margin: unset;
   }
 }
 @media only screen and (max-width: 1200px) {
@@ -1567,25 +1600,19 @@ html {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
 @media only screen and (max-width: 1439px) {
-  .header__container {
-    align-items: center;
+  .slider-main__content {
+    font-size: 42px;
+    line-height: 58px;
   }
-  .btnMenu,
-  .btnMenu2 {
-    display: block;
+  .exhibition__item:first-child {
+    padding: 8px;
   }
-  .menu__wrapper-list,
-  .header__menu {
-    display: none;
+  .support__column-box h2 {
+    font-size: 24px;
   }
-  .exhibition__gallery {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-  }
-  .exhibition__item:not(:nth-child(9999)) {
-    grid-column: unset;
+  .support__column-box h3 {
+    font-size: 20px;
   }
 }
 @media only screen and (max-width: 599px) {
