@@ -227,7 +227,7 @@ $(document).ready(function () {
             <div class="menu__wrapper-list">
               <ul>
                 <li>
-                  <a href="#!">About</a>
+                  <a href="about.html">About</a>
                 </li>
                 <li>
                   <a href="#!">News</a>
