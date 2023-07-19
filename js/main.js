@@ -9,14 +9,16 @@ $(document).ready(function () {
   });
 
   function showMenu() {
-    let menu = $("#menuMobile");
+    let menuMobile = $("#menuMobile");
+    let overlayShadow = $("#overlay");
+    const body = $("body");
 
-    if (menu.length === 0) {
-      menu = $("<div>", { id: "menuMobile" }).appendTo("body");
-      $("<div>", { id: "overlay" }).appendTo("body");
-      menu.css("transform", "translateX(-100%)");
+    if (menuMobile.length === 0) {
+      menuMobile = $("<div>", { id: "menuMobile" }).appendTo("body");
+      overlayShadow = $("<div>", { id: "overlay" }).appendTo("body");
+      menuMobile.css("transform", "translateX(-100%)");
 
-      menu.html(`
+      menuMobile.html(`
         <div id="menuContent">
             <i class="menuMobile__close fas fa-times"></i>
             <ul class="menuMobile__list">
@@ -53,24 +55,25 @@ $(document).ready(function () {
                 </ul>
             </div>`);
 
+      // Wait Animation When Click
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
-          menu.addClass("show");
-          $("#overlay").addClass("show");
-          $("html").css("overflow-y", "hidden");
+          menuMobile.addClass("show");
+          overlayShadow.addClass("show");
+          body.css("overflow", "hidden");
         });
       });
 
       // Handle Close Menu & Overlay
       $(".menuMobile__close, #overlay").on("click", function () {
-        menu.removeClass("show");
-        $("#overlay").removeClass("show");
-        $("html").css("overflow-y", "auto");
+        menuMobile.removeClass("show");
+        overlayShadow.removeClass("show");
+        body.css("overflow", "auto");
       });
     } else {
-      menu.toggleClass("show");
-      $("#overlay").toggleClass("show");
-      $("html").css("overflow-y", "hidden");
+      menuMobile.addClass("show");
+      overlayShadow.addClass("show");
+      body.css("overflow", "hidden");
     }
   }
 
@@ -95,34 +98,6 @@ $(document).ready(function () {
       });
     });
   });
-
-  // // Handle Scroll window Show Uptop
-  // const upTop = $("#up-top");
-  // function debounceFn(func, wait, immediate) {
-  //   let timeout;
-  //   return function () {
-  //     let context = this,
-  //       args = arguments;
-  //     let later = function () {
-  //       timeout = null;
-  //       if (!immediate) func.apply(context, args);
-  //     };
-  //     let callNow = immediate && !timeout;
-  //     clearTimeout(timeout);
-  //     timeout = setTimeout(later, wait);
-  //     if (callNow) func.apply(context, args);
-  //   };
-  // }
-  // $(window).scroll(
-  //   debounceFn(function () {
-  //     const scrollY = window.pageYOffset;
-  //     scrollY > 400 ? upTop.addClass("active") : upTop.removeClass("active");
-  //   }, 100)
-  // );
-
-  // upTop.click(function () {
-  //   $("html, body").animate({ scrollTop: 0 }, "slow");
-  // });
 
   // Hanld Count Number
   let completed = false;
