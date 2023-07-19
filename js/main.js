@@ -223,7 +223,7 @@ $(document).ready(function () {
       if (destination.anchor == "section2") {
         countNumbers();
       }
-      
+
       // Handle Up Top Page
       const upTopButton = $("#up-top");
       if (destination.index !== 0) {
@@ -279,22 +279,11 @@ $(document).ready(function () {
         if ($(".menu").length === 0) {
           $("body").append(menuHTML);
         }
-        $(".header")
-          .fadeOut()
-          .promise()
-          .then(function () {
-            $(".menu").addClass("active");
-          });
+        $(".header").fadeOut();
+          $(".menu").addClass("active");
       } else {
+        $(".header").fadeIn();
         $(".menu").removeClass("active");
-        $(".header")
-          .fadeIn()
-          .promise()
-          .then(function () {
-            if (!$(".menu").hasClass("active")) {
-              $(".menu").remove();
-            }
-          });
       }
     },
     navigation: true,
