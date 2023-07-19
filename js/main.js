@@ -280,7 +280,7 @@ $(document).ready(function () {
           $("body").append(menuHTML);
         }
         $(".header").fadeOut();
-          $(".menu").addClass("active");
+        $(".menu").addClass("active");
       } else {
         $(".header").fadeIn();
         $(".menu").removeClass("active");
