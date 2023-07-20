@@ -526,15 +526,6 @@
   background: var(--primary-color);
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
-
-/* test */
-.wrapper-second {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 99;
-  width: 100%;
-}
 .slider-main .item {
   width: 100% !important;
   height: 100vh !important;
@@ -712,6 +703,9 @@
   }
   .section:first-child {
     padding: 0 !important;
+  }
+  .section:first-child .wrapper-second {
+    position: unset;
   }
   .slider-main__content {
     font-size: 24px;
