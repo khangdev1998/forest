@@ -10,6 +10,10 @@ body {
   line-height: 1.5;
   font-family: "Open Sans", sans-serif;
 }
+html,
+body {
+  overflow-x: hidden;
+}
 :root {
   --primary-color: #009933;
   --light-color: #ffffff;
@@ -588,6 +592,9 @@ body {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+.header__submenu li {
+  position: relative;
+}
 .header__submenu li a {
   padding: 10px 15px 10px 50px;
   font-size: 16px;
@@ -608,12 +615,29 @@ body {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.header__submenu li:hover {
+.header__submenu > li:hover,
+.header__submenu-last li:hover {
   background-color: var(--primary-color);
   transition: all 0.24s ease 0s;
 }
-.header__submenu li:hover a {
+.header__submenu > li:hover > a,
+.header__submenu-last li a:hover {
   color: var(--light-color);
+}
+.header__submenu li:hover .header__submenu-last {
+  opacity: 1;
+  visibility: visible;
+  top: 0;
+}
+.header__submenu-last {
+  position: absolute;
+  right: -100%;
+  top: 100%;
+  background: #effef4;
+  width: 100%;
+  transition: all 0.3s ease-in;
+  opacity: 0;
+  visibility: hidden;
 }
 .wrapper-second {
   position: absolute;
@@ -924,7 +948,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform .24s linear;
+  transition: transform 0.24s linear;
 }
 .library-wrapper__content {
   position: absolute;
@@ -1153,6 +1177,9 @@ body {
 
 /* Responsive All Screen Mobile Tablet */
 @media only screen and (max-width: 1599px) {
+  .header__submenu-last {
+    right: 100%;
+  }
   .footer__slider .owl-next {
     right: 0;
   }

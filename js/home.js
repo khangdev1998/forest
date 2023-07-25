@@ -25,6 +25,7 @@ $("#fullpage").fullpage({
     "section5",
     "section6",
     "section7",
+    "section8",
   ],
   afterLoad: function (origin, destination, direction) {
     // Hanld Count Number
@@ -103,6 +104,7 @@ $("#fullpage").fullpage({
     "NEWS",
     "SUPPORT FOR VISITORS",
     "LIBRARY",
+    "EVENTS",
     "FOOTER",
   ],
   showActiveTooltip: true,
@@ -189,4 +191,34 @@ $(".marquee__main").marquee({
   direction: "right",
   duplicated: true,
   pauseOnHover: true,
+});
+
+// Slider Events
+const btnNext =
+  '<img class="footer__slider-icon" src="./images/slider-next.png" alt="this-is-icon">';
+const btnPrev =
+  '<img class="footer__slider-icon" src="./images/slider-prev.png" alt="this-is-icon">';
+$(".events__carousel").owlCarousel({
+  loop: true,
+  margin: 20,
+  autoplay:true,
+  smartSpeed: 850,
+  autoplaySpeed: 850,
+  nav: true,
+  autoplayHoverPause: true,
+  autoplayTimeout: 4800,
+  dots: false,
+  navText: [btnPrev, btnNext],
+  stagePadding: 10,
+  responsive: {
+    0: {
+      items: 1,
+    },
+    600: {
+      items: 2,
+    },
+    1200: {
+      items: 3
+    }
+  },
 });

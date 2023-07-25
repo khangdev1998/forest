@@ -97,6 +97,31 @@ $(document).ready(function () {
   }
   // Tối ưu hoá delay scroll giúp tài nguyên không quá tải
 
+  // Handle up back to top
+  function smoothScrollTo(top, duration) {
+    var start = window.pageYOffset,
+      change = top - start,
+      currentTime = 0,
+      increment = 20;
+
+    var animateScroll = function () {
+      currentTime += increment;
+      var val = Math.easeInOutQuad(currentTime, start, change, duration);
+      window.scroll(0, val);
+      if (currentTime < duration) {
+        setTimeout(animateScroll, increment);
+      }
+    };
+    animateScroll();
+  }
+
+  Math.easeInOutQuad = function (t, b, c, d) {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t + b;
+    t--;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
+  };
+
   window.addEventListener(
     "scroll",
     debounceFn(function () {
@@ -108,10 +133,7 @@ $(document).ready(function () {
         upTop.removeAttribute("class");
       }
       upTop.onclick = function () {
-        scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
+        smoothScrollTo(0, 640);
       };
     }, 100)
   );
