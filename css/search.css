@@ -69,6 +69,9 @@
     background-color: var(--primary-color);
     color: var(--light-color);
   }
+  .pagination__link:hover img {
+    filter: brightness(0) invert(1);  
+  }
 }
 
 /* Responsive all screen */
