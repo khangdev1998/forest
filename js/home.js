@@ -1,55 +1,76 @@
-// Scroll Page Effect Section
-$("#fullpage").fullpage({
-  afterRender: function () {
-    $(".slider-main").owlCarousel({
-      items: 1,
-      loop: true,
-      margin: 0,
-      nav: false,
-      margin: 0,
-      dots: true,
-      autoplaySpeed: 880,
-      autoplay: true,
-      smartSpeed: 850,
-      autoplayHoverPause: true,
-      autoplayTimeout: 4800,
+$(document).ready(function () {
+  const video = document.getElementById("myVideo");
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5,
+  };
+
+  const observerCallback = function (entries, observer) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        video.play();
+      } else {
+        video.pause();
+      }
     });
-  },
-  autoScrolling: true,
-  scrollHorizontally: true,
-  anchors: [
-    "section1",
-    "section2",
-    "section3",
-    "section4",
-    "section5",
-    "section6",
-    "section7",
-    "section8",
-  ],
-  afterLoad: function (origin, destination, direction) {
-    // Hanld Count Number
-    if (destination.anchor == "section2") {
-      countNumbers();
-    }
+  };
 
-    // Handle Up Top Page
-    const upTopButton = $("#up-top");
-    if (destination.index !== 0) {
-      upTopButton.css({
-        opacity: 1,
-        visibility: "visible",
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  observer.observe(video);
+
+  // Scroll Page Effect Section
+  $("#fullpage").fullpage({
+    afterRender: function () {
+      $(".slider-main").owlCarousel({
+        items: 1,
+        loop: true,
+        margin: 0,
+        nav: false,
+        margin: 0,
+        dots: true,
+        autoplaySpeed: 880,
+        autoplay: true,
+        smartSpeed: 850,
+        autoplayHoverPause: true,
+        autoplayTimeout: 4800,
       });
+    },
+    autoScrolling: true,
+    scrollHorizontally: true,
+    anchors: [
+      "section1",
+      "section2",
+      "section3",
+      "section4",
+      "section5",
+      "section6",
+      "section7",
+      "section8",
+    ],
+    afterLoad: function (origin, destination, direction) {
+      // Hanld Count Number
+      if (destination.anchor == "section2") {
+        countNumbers();
+      }
 
-      upTopButton.on("click", function () {
-        $.fn.fullpage.moveTo(1);
-      });
-    } else {
-      upTopButton.removeAttr("style");
-    }
+      // Handle Up Top Page
+      const upTopButton = $("#up-top");
+      if (destination.index !== 0) {
+        upTopButton.css({
+          opacity: 1,
+          visibility: "visible",
+        });
 
-    // Handle Show Menu Scroll Page
-    const menuHTML = `
+        upTopButton.on("click", function () {
+          $.fn.fullpage.moveTo(1);
+        });
+      } else {
+        upTopButton.removeAttr("style");
+      }
+
+      // Handle Show Menu Scroll Page
+      const menuHTML = `
       <div class="menu">
         <div class="container">
           <div class="menu__wrapper">
@@ -84,141 +105,142 @@ $("#fullpage").fullpage({
         </div>
       </div>
 `;
-    if (destination.index >= 1) {
-      if ($(".menu").length === 0) {
-        $("body").append(menuHTML);
-      }
-      $(".header").fadeOut();
-      $(".menu").addClass("active");
-    } else {
-      $(".header").fadeIn();
-      $(".menu").removeClass("active");
-    }
-  },
-  navigation: true,
-  navigationPosition: "right",
-  navigationTooltips: [
-    "HEADER",
-    "VIETNAM FOREST RESOURCES MUSEUM",
-    "EXHIBITION ROOM",
-    "NEWS",
-    "SUPPORT FOR VISITORS",
-    "LIBRARY",
-    "EVENTS",
-    "FOOTER",
-  ],
-  showActiveTooltip: true,
-  responsiveWidth: 1599,
-  responsiveHeight: null,
-  afterResponsive: function (isResponsive) {
-    var sections = document.querySelectorAll(".section:not(:first-child)");
-
-    if (isResponsive) {
-      for (var i = 0; i < sections.length; i++) {
-        sections[i].style.padding = "68px 0";
-      }
-    } else {
-      for (var i = 0; i < sections.length; i++) {
-        sections[i].style.padding = null;
-      }
-    }
-  },
-});
-
-// Gọi fullpage_api.reBuild() sau khi trang đã tải
-fullpage_api.reBuild();
-
-// Hanld Count Number
-let completed = false;
-const counters = $(".counter");
-
-counters.text("0");
-
-function countNumbers() {
-  if (!completed) {
-    const countersQuantity = counters.length;
-    let counter = [];
-
-    for (let i = 0; i < countersQuantity; i++) {
-      counter[i] = parseInt(counters[i].dataset.count); // Using dataset to get data-count attribute value
-    }
-
-    const count = function (start, value, id) {
-      let localStart = start;
-      const intervalId = setInterval(function () {
-        if (localStart < value) {
-          localStart++;
-          counters[id].innerHTML = localStart;
-        } else {
-          clearInterval(intervalId);
+      if (destination.index >= 1) {
+        if ($(".menu").length === 0) {
+          $("body").append(menuHTML);
         }
-      }, 40);
-    };
+        $(".header").fadeOut();
+        $(".menu").addClass("active");
+      } else {
+        $(".header").fadeIn();
+        $(".menu").removeClass("active");
+      }
+    },
+    navigation: true,
+    navigationPosition: "right",
+    navigationTooltips: [
+      "HEADER",
+      "VIETNAM FOREST RESOURCES MUSEUM",
+      "EXHIBITION ROOM",
+      "NEWS",
+      "SUPPORT FOR VISITORS",
+      "LIBRARY",
+      "EVENTS",
+      "FOOTER",
+    ],
+    showActiveTooltip: true,
+    responsiveWidth: 1599,
+    responsiveHeight: null,
+    afterResponsive: function (isResponsive) {
+      var sections = document.querySelectorAll(".section:not(:first-child)");
 
-    for (let j = 0; j < countersQuantity; j++) {
-      count(0, counter[j], j);
+      if (isResponsive) {
+        for (var i = 0; i < sections.length; i++) {
+          sections[i].style.padding = "68px 0";
+        }
+      } else {
+        for (var i = 0; i < sections.length; i++) {
+          sections[i].style.padding = null;
+        }
+      }
+    },
+  });
+
+  // Gọi fullpage_api.reBuild() sau khi trang đã tải
+  fullpage_api.reBuild();
+
+  // Hanld Count Number
+  let completed = false;
+  const counters = $(".counter");
+
+  counters.text("0");
+
+  function countNumbers() {
+    if (!completed) {
+      const countersQuantity = counters.length;
+      let counter = [];
+
+      for (let i = 0; i < countersQuantity; i++) {
+        counter[i] = parseInt(counters[i].dataset.count); // Using dataset to get data-count attribute value
+      }
+
+      const count = function (start, value, id) {
+        let localStart = start;
+        const intervalId = setInterval(function () {
+          if (localStart < value) {
+            localStart++;
+            counters[id].innerHTML = localStart;
+          } else {
+            clearInterval(intervalId);
+          }
+        }, 40);
+      };
+
+      for (let j = 0; j < countersQuantity; j++) {
+        count(0, counter[j], j);
+      }
+      completed = true;
     }
-    completed = true;
   }
-}
 
-// Handle Click Move tab
-const tabItem = $(".news__tab-item");
-const tabContent = $(".news__content-pane");
+  // Handle Click Move tab
+  const tabItem = $(".news__tab-item");
+  const tabContent = $(".news__content-pane");
 
-tabItem.each(function (index) {
-  $(this).on("click", function () {
-    $(".news__tab-item.active").removeClass("active");
-    $(this).addClass("active");
+  tabItem.each(function (index) {
+    $(this).on("click", function () {
+      $(".news__tab-item.active").removeClass("active");
+      $(this).addClass("active");
 
-    tabContent.removeClass("active");
-    var activeContent = tabContent.eq(index).addClass("active");
+      tabContent.removeClass("active");
+      var activeContent = tabContent.eq(index).addClass("active");
 
-    var images = activeContent.find(".news__content-item");
-    images.each(function (i) {
-      $(this)
-        .css("opacity", "0")
-        .delay(i * 200)
-        .animate({ opacity: "1" }, 1000);
+      var images = activeContent.find(".news__content-item");
+      images.each(function (i) {
+        $(this)
+          .css("opacity", "0")
+          .delay(i * 200)
+          .animate({ opacity: "1" }, 1000);
+      });
     });
   });
-});
 
-// Handle Marquee
-$(".marquee__main").marquee({
-  duration: 25000,
-  delayBeforeStart: 0,
-  direction: "right",
-  duplicated: true,
-  pauseOnHover: true,
-});
+  // Handle Marquee
+  $(".marquee__main").marquee({
+    duration: 25000,
+    delayBeforeStart: 0,
+    direction: "right",
+    duplicated: true,
+    pauseOnHover: true,
+  });
 
-// Slider Events
-const btnNext =
-  '<img class="footer__slider-icon" src="./images/slider-next.png" alt="this-is-icon">';
-const btnPrev =
-  '<img class="footer__slider-icon" src="./images/slider-prev.png" alt="this-is-icon">';
-$(".events__carousel").owlCarousel({
-  loop: true,
-  margin: 20,
-  autoplay:true,
-  smartSpeed: 850,
-  autoplaySpeed: 850,
-  nav: true,
-  autoplayHoverPause: true,
-  autoplayTimeout: 4800,
-  dots: false,
-  navText: [btnPrev, btnNext],
-  stagePadding: 10,
-  responsive: {
-    0: {
-      items: 1,
+  // Slider Events
+  const btnNext =
+    '<img class="footer__slider-icon" src="./images/slider-next.png" alt="this-is-icon">';
+  const btnPrev =
+    '<img class="footer__slider-icon" src="./images/slider-prev.png" alt="this-is-icon">';
+  $(".events__carousel").owlCarousel({
+    loop: true,
+    margin: 20,
+    autoplay: true,
+    smartSpeed: 850,
+    autoplaySpeed: 850,
+    nav: true,
+    autoplayHoverPause: true,
+    autoplayTimeout: 4800,
+    dots: false,
+    navText: [btnPrev, btnNext],
+    stagePadding: 10,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      600: {
+        items: 2,
+      },
+      1200: {
+        items: 3,
+      },
     },
-    600: {
-      items: 2,
-    },
-    1200: {
-      items: 3
-    }
-  },
+  });
 });
