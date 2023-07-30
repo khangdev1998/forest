@@ -1,22 +1,5 @@
 $(document).ready(function () {
-  // Kiểm tra xem thiết bị hiện tại có phải là di động hay không
-  function isMobileDevice() {
-    return (
-      typeof window.orientation !== "undefined" ||
-      navigator.userAgent.indexOf("IEMobile") !== -1
-    );
-  }
-
   const video = document.getElementById("myVideo");
-
-  // Nếu thiết bị hiện tại không phải là di động
-  if (!isMobileDevice()) {
-    // Chặn menu ngữ cảnh từ việc xuất hiện
-    video.oncontextmenu = function (event) {
-      event.preventDefault();
-    };
-  }
-
   const observerOptions = {
     root: null,
     rootMargin: "0px",
@@ -37,7 +20,24 @@ $(document).ready(function () {
   observer.observe(video);
 
   // Scroll Page Effect Section
+  let hasAnimatedNews = false;
+  let hasAnimatedHeader = false;
+  let scrollPastHeader = false;
+
   $("#fullpage").fullpage({
+    onLeave: function (origin, destination, direction) {
+      var sectionId = destination.item.id;
+      if (sectionId === "section-news" && !hasAnimatedNews) {
+        hasAnimatedNews = true;
+        gsap.from(".news__content-pane.active .news__content-item", 1, {
+          duration: 2,
+          y: 150,
+          opacity: 0,
+          ease: "power1.out",
+          stagger: 0.6,
+        });
+      }
+    },
     afterRender: function () {
       $(".slider-main").owlCarousel({
         items: 1,
@@ -50,7 +50,8 @@ $(document).ready(function () {
         autoplay: true,
         smartSpeed: 850,
         autoplayHoverPause: true,
-        autoplayTimeout: 4800,
+        autoplayTimeout: 6850,
+        mouseDrag: false,
       });
     },
     autoScrolling: true,
@@ -66,6 +67,68 @@ $(document).ready(function () {
       "section8",
     ],
     afterLoad: function (origin, destination, direction) {
+      var sectionId = destination.item.id;
+      if (
+        sectionId === "section-header" &&
+        !hasAnimatedHeader &&
+        !scrollPastHeader &&
+        !/Mobi|Android/i.test(navigator.userAgent)
+      ) {
+        hasAnimatedHeader = true;
+        const tl = gsap.timeline({
+          onStart: function () {
+            // Disable scrolling when the animations start
+            fullpage_api.setAllowScrolling(false);
+          },
+          onComplete: function () {
+            // Enable scrolling when all the animations complete
+            fullpage_api.setAllowScrolling(true);
+          },
+        });
+
+        tl.from(".slider-main__content", {
+          duration: 2,
+          rotationY: 180,
+          opacity: 0,
+        })
+          .add([
+            gsap.from(".owl-dots", {
+              duration: 1.2,
+              opacity: 0,
+            }),
+            gsap.from(".slider-main__link", {
+              duration: 1.4,
+              opacity: 0,
+              ease: "power1.out",
+            }),
+          ])
+          .add([
+            gsap.from(".hotline", {
+              duration: 1.2,
+              opacity: 0,
+            }),
+            gsap.from("#fp-nav", {
+              duration: 1,
+              opacity: 0,
+            }),
+          ])
+          .add([
+            gsap.from(".wrapper-second", {
+              duration: 1.2,
+              rotationX: 180,
+              opacity: 0,
+            }),
+            gsap.from(".marquee", {
+              y: window.innerHeight,
+              duration: 1.8,
+              opacity: 0,
+              ease: "bounce.back.out",
+            }),
+          ]);
+      } else if (sectionId !== "section-header") {
+        scrollPastHeader = true;
+      }
+      // test
       // Hanld Count Number
       if (destination.anchor == "section2") {
         countNumbers();
@@ -260,4 +323,58 @@ $(document).ready(function () {
       },
     },
   });
+
+  //  Handle animation element gsap
+  // window.onload = function () {
+  //   const tl = gsap.timeline({
+  //     onStart: function () {
+  //       // Disable scrolling when the animations start
+  //       fullpage_api.setAllowScrolling(false);
+  //     },
+  //     onComplete: function () {
+  //       // Enable scrolling when all the animations complete
+  //       fullpage_api.setAllowScrolling(true);
+  //     },
+  //   });
+
+  //   tl.from(".slider-main__content", {
+  //     duration: 2,
+  //     rotationY: 180,
+  //     opacity: 0,
+  //   })
+  //     .add([
+  //       gsap.from(".owl-dots", {
+  //         duration: 1.2,
+  //         opacity: 0,
+  //       }),
+  //       gsap.from(".slider-main__link", {
+  //         duration: 1.4,
+  //         opacity: 0,
+  //         ease: "power1.out",
+  //       }),
+  //     ])
+  //     .add([
+  //       gsap.from(".hotline", {
+  //         duration: 1.2,
+  //         opacity: 0,
+  //       }),
+  //       gsap.from("#fp-nav", {
+  //         duration: 1,
+  //         opacity: 0,
+  //       }),
+  //     ])
+  //     .add([
+  //       gsap.from(".wrapper-second", {
+  //         duration: 1.2,
+  //         rotationX: 180,
+  //         opacity: 0,
+  //       }),
+  //       gsap.from(".marquee", {
+  //         y: window.innerHeight,
+  //         duration: 1.8,
+  //         opacity: 0,
+  //         ease: "bounce.back.out",
+  //       }),
+  //     ]);
+  // };
 });
