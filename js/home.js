@@ -1,5 +1,22 @@
 $(document).ready(function () {
+  // Kiểm tra xem thiết bị hiện tại có phải là di động hay không
+  function isMobileDevice() {
+    return (
+      typeof window.orientation !== "undefined" ||
+      navigator.userAgent.indexOf("IEMobile") !== -1
+    );
+  }
+
   const video = document.getElementById("myVideo");
+
+  // Nếu thiết bị hiện tại không phải là di động
+  if (!isMobileDevice()) {
+    // Chặn menu ngữ cảnh từ việc xuất hiện
+    video.oncontextmenu = function (event) {
+      event.preventDefault();
+    };
+  }
+
   const observerOptions = {
     root: null,
     rootMargin: "0px",
@@ -132,14 +149,14 @@ $(document).ready(function () {
     responsiveWidth: 1599,
     responsiveHeight: null,
     afterResponsive: function (isResponsive) {
-      var sections = document.querySelectorAll(".section:not(:first-child)");
+      const sections = document.querySelectorAll(".section:not(:first-child)");
 
       if (isResponsive) {
-        for (var i = 0; i < sections.length; i++) {
+        for (let i = 0; i < sections.length; i++) {
           sections[i].style.padding = "68px 0";
         }
       } else {
-        for (var i = 0; i < sections.length; i++) {
+        for (let i = 0; i < sections.length; i++) {
           sections[i].style.padding = null;
         }
       }
@@ -193,9 +210,9 @@ $(document).ready(function () {
       $(this).addClass("active");
 
       tabContent.removeClass("active");
-      var activeContent = tabContent.eq(index).addClass("active");
+      const activeContent = tabContent.eq(index).addClass("active");
 
-      var images = activeContent.find(".news__content-item");
+      const images = activeContent.find(".news__content-item");
       images.each(function (i) {
         $(this)
           .css("opacity", "0")
