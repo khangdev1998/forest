@@ -77,58 +77,62 @@ $(document).ready(function () {
         hasAnimatedHeader = true;
         const tl = gsap.timeline({
           onStart: function () {
-            // Disable scrolling when the animations start
             fullpage_api.setAllowScrolling(false);
           },
           onComplete: function () {
-            // Enable scrolling when all the animations complete
             fullpage_api.setAllowScrolling(true);
           },
         });
 
-        tl.from(".slider-main__content", {
-          duration: 2,
-          rotationY: 180,
-          opacity: 0,
-        })
-          .add([
-            gsap.from(".owl-dots", {
-              duration: 1.2,
+        // Check if '.owl-dots' exists
+        var checkExist = setInterval(function () {
+          if ($(".owl-dots").length) {
+            clearInterval(checkExist);
+
+            tl.from(".slider-main__content", {
+              duration: 2,
+              rotationY: 180,
               opacity: 0,
-            }),
-            gsap.from(".slider-main__link", {
-              duration: 1.4,
-              opacity: 0,
-              ease: "power1.out",
-            }),
-          ])
-          .add([
-            gsap.from(".hotline", {
-              duration: 1.2,
-              opacity: 0,
-            }),
-            gsap.from("#fp-nav", {
-              duration: 1,
-              opacity: 0,
-            }),
-          ])
-          .add([
-            gsap.from(".wrapper-second", {
-              duration: 1.2,
-              rotationX: 180,
-              opacity: 0,
-            }),
-            gsap.from(".marquee", {
-              y: window.innerHeight,
-              duration: 1.8,
-              opacity: 0,
-              ease: "bounce.back.out",
-            }),
-          ]);
+            })
+              .add([
+                gsap.from(".owl-dots", {
+                  duration: 1.2,
+                  opacity: 0,
+                }),
+                gsap.from(".slider-main__link", {
+                  duration: 1.4,
+                  opacity: 0,
+                  ease: "power1.out",
+                }),
+              ])
+              .add([
+                gsap.from(".hotline", {
+                  duration: 1.2,
+                  opacity: 0,
+                }),
+                gsap.from("#fp-nav", {
+                  duration: 1,
+                  opacity: 0,
+                }),
+              ])
+              .add([
+                gsap.from(".wrapper-second", {
+                  duration: 1.2,
+                  rotationX: 180,
+                  opacity: 0,
+                }),
+                gsap.from(".marquee", {
+                  y: window.innerHeight,
+                  duration: 1.8,
+                  opacity: 0,
+                  ease: "bounce.back.out",
+                }),
+              ]);
+          }
+        }, 120); // check every 120ms
       } else if (sectionId !== "section-header") {
         scrollPastHeader = true;
       }
-      // test
       // Hanld Count Number
       if (destination.anchor == "section2") {
         countNumbers();
@@ -323,58 +327,4 @@ $(document).ready(function () {
       },
     },
   });
-
-  //  Handle animation element gsap
-  // window.onload = function () {
-  //   const tl = gsap.timeline({
-  //     onStart: function () {
-  //       // Disable scrolling when the animations start
-  //       fullpage_api.setAllowScrolling(false);
-  //     },
-  //     onComplete: function () {
-  //       // Enable scrolling when all the animations complete
-  //       fullpage_api.setAllowScrolling(true);
-  //     },
-  //   });
-
-  //   tl.from(".slider-main__content", {
-  //     duration: 2,
-  //     rotationY: 180,
-  //     opacity: 0,
-  //   })
-  //     .add([
-  //       gsap.from(".owl-dots", {
-  //         duration: 1.2,
-  //         opacity: 0,
-  //       }),
-  //       gsap.from(".slider-main__link", {
-  //         duration: 1.4,
-  //         opacity: 0,
-  //         ease: "power1.out",
-  //       }),
-  //     ])
-  //     .add([
-  //       gsap.from(".hotline", {
-  //         duration: 1.2,
-  //         opacity: 0,
-  //       }),
-  //       gsap.from("#fp-nav", {
-  //         duration: 1,
-  //         opacity: 0,
-  //       }),
-  //     ])
-  //     .add([
-  //       gsap.from(".wrapper-second", {
-  //         duration: 1.2,
-  //         rotationX: 180,
-  //         opacity: 0,
-  //       }),
-  //       gsap.from(".marquee", {
-  //         y: window.innerHeight,
-  //         duration: 1.8,
-  //         opacity: 0,
-  //         ease: "bounce.back.out",
-  //       }),
-  //     ]);
-  // };
 });
