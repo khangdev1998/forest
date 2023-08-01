@@ -1,4 +1,17 @@
 $(document).ready(function () {
+  var xhr = new XMLHttpRequest();
+  xhr.addEventListener("progress", function (event) {
+    if (event.lengthComputable) {
+      var percentComplete = (event.loaded / event.total) * 100;
+      console.log("Tiến trình tải: " + percentComplete + "%");
+      fullpage_api.setAllowScrolling(false);
+    } else {
+      alert('test')
+    }
+  });
+  xhr.open("GET", "your-file-url");
+  xhr.send();
+
   const video = document.getElementById("myVideo");
   const observerOptions = {
     root: null,
@@ -26,7 +39,7 @@ $(document).ready(function () {
 
   $("#fullpage").fullpage({
     onLeave: function (origin, destination, direction) {
-      var sectionId = destination.item.id;
+      const sectionId = destination.item.id;
       if (sectionId === "section-news" && !hasAnimatedNews) {
         hasAnimatedNews = true;
         gsap.from(".news__content-pane.active .news__content-item", 1, {
@@ -64,10 +77,9 @@ $(document).ready(function () {
       "section5",
       "section6",
       "section7",
-      "section8",
     ],
     afterLoad: function (origin, destination, direction) {
-      var sectionId = destination.item.id;
+      const sectionId = destination.item.id;
       if (
         sectionId === "section-header" &&
         !hasAnimatedHeader &&
@@ -80,59 +92,82 @@ $(document).ready(function () {
             fullpage_api.setAllowScrolling(false);
           },
           onComplete: function () {
+            console.log("test");
             fullpage_api.setAllowScrolling(true);
+            $(".wrapper").addClass("active");
           },
         });
 
-        // Check if '.owl-dots' exists
-        var checkExist = setInterval(function () {
-          if ($(".owl-dots").length) {
-            clearInterval(checkExist);
+        window.onload = function () {
+          gsap.to("#loader-wrapper", {
+            duration: 1, // change the duration as needed
+            opacity: 0,
+            onComplete: function () {
+              // Hide the loader after the animation completes
+              $("#loader-wrapper").hide();
+            },
+          });
 
-            tl.from(".slider-main__content", {
-              duration: 2,
-              rotationY: 180,
-              opacity: 0,
-            })
-              .add([
-                gsap.from(".owl-dots", {
-                  duration: 1.2,
-                  opacity: 0,
-                }),
-                gsap.from(".slider-main__link", {
-                  duration: 1.4,
-                  opacity: 0,
-                  ease: "power1.out",
-                }),
-              ])
-              .add([
-                gsap.from(".hotline", {
-                  duration: 1.2,
-                  opacity: 0,
-                }),
-                gsap.from("#fp-nav", {
-                  duration: 1,
-                  opacity: 0,
-                }),
-              ])
-              .add([
-                gsap.from(".wrapper-second", {
-                  duration: 1.2,
-                  rotationX: 180,
-                  opacity: 0,
-                }),
-                gsap.from(".marquee", {
-                  y: window.innerHeight,
-                  duration: 1.8,
-                  opacity: 0,
-                  ease: "bounce.back.out",
-                }),
-              ]);
-          }
-        }, 120); // check every 120ms
+          // Handle Marquee
+          $(".marquee__main").marquee({
+            duration: 25000,
+            delayBeforeStart: 4000,
+            direction: "right",
+            duplicated: true,
+            pauseOnHover: true,
+          });
+
+          // Check if '.owl-dots' exists
+          let checkExist = setInterval(function () {
+            if ($(".owl-dots").length) {
+              clearInterval(checkExist);
+
+              tl.from(".slider-main__content", {
+                duration: 2,
+                rotationY: 180,
+                opacity: 0,
+              })
+                .add([
+                  gsap.from(".owl-dots", {
+                    duration: 1.2,
+                    opacity: 0,
+                  }),
+                  gsap.from(".slider-main__link", {
+                    duration: 1.4,
+                    opacity: 0,
+                    ease: "power1.out",
+                  }),
+                ])
+                .add([
+                  gsap.from(".hotline", {
+                    duration: 1.2,
+                    opacity: 0,
+                  }),
+                  gsap.from("#fp-nav", {
+                    duration: 1,
+                    opacity: 0,
+                  }),
+                ])
+                .add([
+                  gsap.from(".wrapper-second", {
+                    duration: 1.2,
+                    rotationX: 180,
+                    opacity: 0,
+                  }),
+                  gsap.from(".marquee", {
+                    y: window.innerHeight,
+                    duration: 1.8,
+                    opacity: 0,
+                    ease: "bounce.back.out",
+                  }),
+                ]);
+            }
+          }, 120); // check every 120ms
+        };
       } else if (sectionId !== "section-header") {
         scrollPastHeader = true;
       }
+
       // Hanld Count Number
       if (destination.anchor == "section2") {
         countNumbers();
@@ -209,7 +244,6 @@ $(document).ready(function () {
       "NEWS",
       "SUPPORT FOR VISITORS",
       "LIBRARY",
-      "EVENTS",
       "FOOTER",
     ],
     showActiveTooltip: true,
@@ -287,15 +321,6 @@ $(document).ready(function () {
           .animate({ opacity: "1" }, 1000);
       });
     });
-  });
-
-  // Handle Marquee
-  $(".marquee__main").marquee({
-    duration: 25000,
-    delayBeforeStart: 0,
-    direction: "right",
-    duplicated: true,
-    pauseOnHover: true,
   });
 
   // Slider Events
