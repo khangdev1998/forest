@@ -1,16 +1,16 @@
 $(document).ready(function () {
-  var xhr = new XMLHttpRequest();
-  xhr.addEventListener("progress", function (event) {
-    if (event.lengthComputable) {
-      var percentComplete = (event.loaded / event.total) * 100;
-      console.log("Tiến trình tải: " + percentComplete + "%");
-      fullpage_api.setAllowScrolling(false);
-    } else {
-      alert('test')
-    }
-  });
-  xhr.open("GET", "your-file-url");
-  xhr.send();
+  // Handle Marquee
+  function handleMarquee(timeDelay = 0) {
+    $(".marquee__main").marquee({
+      duration: 25000,
+      delayBeforeStart: timeDelay,
+      direction: "right",
+      duplicated: true,
+      pauseOnHover: true,
+    });
+  }
+
+  handleMarquee();
 
   const video = document.getElementById("myVideo");
   const observerOptions = {
@@ -52,6 +52,7 @@ $(document).ready(function () {
       }
     },
     afterRender: function () {
+      fullpage_api.setAllowScrolling(false);
       $(".slider-main").owlCarousel({
         items: 1,
         loop: true,
@@ -89,32 +90,21 @@ $(document).ready(function () {
         hasAnimatedHeader = true;
         const tl = gsap.timeline({
           onStart: function () {
-            fullpage_api.setAllowScrolling(false);
+            console.log("test1");
           },
           onComplete: function () {
-            console.log("test");
-            fullpage_api.setAllowScrolling(true);
-            $(".wrapper").addClass("active");
+            console.log("test2");
           },
         });
 
         window.onload = function () {
           gsap.to("#loader-wrapper", {
-            duration: 1, // change the duration as needed
+            duration: 1.4, // change the duration as needed
             opacity: 0,
             onComplete: function () {
               // Hide the loader after the animation completes
               $("#loader-wrapper").hide();
             },
-          });
-
-          // Handle Marquee
-          $(".marquee__main").marquee({
-            duration: 25000,
-            delayBeforeStart: 4000,
-            direction: "right",
-            duplicated: true,
-            pauseOnHover: true,
           });
 
           // Check if '.owl-dots' exists
@@ -139,16 +129,6 @@ $(document).ready(function () {
                   }),
                 ])
                 .add([
-                  gsap.from(".hotline", {
-                    duration: 1.2,
-                    opacity: 0,
-                  }),
-                  gsap.from("#fp-nav", {
-                    duration: 1,
-                    opacity: 0,
-                  }),
-                ])
-                .add([
                   gsap.from(".wrapper-second", {
                     duration: 1.2,
                     rotationX: 180,
@@ -160,12 +140,33 @@ $(document).ready(function () {
                     opacity: 0,
                     ease: "bounce.back.out",
                   }),
-                ]);
+                ])
+                .add([
+                  gsap.from(".hotline", {
+                    x: window.innerWidth,
+                    duration: 1,
+                    opacity: 0,
+                  }),
+                  gsap.from("#fp-nav", {
+                    x: window.innerWidth,
+                    duration: 1,
+                    opacity: 0,
+                    onComplete: function () {
+                      fullpage_api.setAllowScrolling(true);
+                    },
+                  }),
+                ])
             }
           }, 120); // check every 120ms
         };
       } else if (sectionId !== "section-header") {
         scrollPastHeader = true;
+        $("#loader-wrapper").hide();
+        gsap.to("#loader-wrapper", {
+          duration: 1.4, // change the duration as needed
+          opacity: 0,
+        });
+        fullpage_api.setAllowScrolling(true);
       }
 
       // Hanld Count Number
