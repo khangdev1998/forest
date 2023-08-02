@@ -27,11 +27,10 @@
   height: 100vh;
   left: 0;
   width: 100%;
-  background-color: greenyellow;
+  background-color: var(--light-color);
   z-index: 9999;
 }
 .wrapper {
-  /* display: none; */
 }
 .wrapper.active {
   display: block;

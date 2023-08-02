@@ -96,7 +96,7 @@ $(document).ready(function () {
             console.log("test2");
           },
         });
-
+        
         window.onload = function () {
           gsap.to("#loader-wrapper", {
             duration: 1.4, // change the duration as needed
@@ -155,7 +155,7 @@ $(document).ready(function () {
                       fullpage_api.setAllowScrolling(true);
                     },
                   }),
-                ])
+                ]);
             }
           }, 120); // check every 120ms
         };
