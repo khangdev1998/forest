@@ -30,11 +30,6 @@
   background-color: var(--light-color);
   z-index: 9999;
 }
-.wrapper {
-}
-.wrapper.active {
-  display: block;
-}
 .loader {
   --half-page: 50%;
   --size-loader: 68px;
@@ -977,12 +972,17 @@
   }
 }
 @media only screen and (max-width: 767px) {
+  .slider-main .owl-dots {
+    bottom: 0;
+  }
   .slider-main__content {
-    font-size: 18px;
+    font-size: 16px;
     line-height: normal;
+    bottom: 4.4rem;
   }
   .slider-main__link {
     font-size: 14.8px;
+    bottom: 2.2rem;
   }
   .slider-main .item {
     height: 22vh !important;
