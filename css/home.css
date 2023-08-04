@@ -27,8 +27,11 @@
   height: 100vh;
   left: 0;
   width: 100%;
-  background-color: var(--light-color);
+  background-image: url('../images/forest-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
   z-index: 9999;
+  overflow: hidden;
 }
 .loader {
   --half-page: 50%;
@@ -978,11 +981,11 @@
   .slider-main__content {
     font-size: 16px;
     line-height: normal;
-    bottom: 4.4rem;
+    bottom: 5.4rem;
   }
   .slider-main__link {
     font-size: 14.8px;
-    bottom: 2.2rem;
+    bottom: 2.9rem;
   }
   .slider-main .item {
     height: 22vh !important;
