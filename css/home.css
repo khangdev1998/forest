@@ -27,7 +27,7 @@
   height: 100vh;
   left: 0;
   width: 100%;
-  background-image: url('../images/forest-bg.jpg');
+  background-image: url("../images/forest-bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   z-index: 9999;
@@ -642,6 +642,10 @@
   width: 100% !important;
   height: 100vh !important;
 }
+.slider-main .item img {
+  height: 100%;
+  object-fit: cover;
+}
 .slider-main__content,
 .slider-main__link {
   position: absolute;
@@ -862,9 +866,6 @@
 @media only screen and (max-width: 1599px) {
   .section {
     height: auto !important;
-  }
-  .slider-main .item img {
-    height: 100% !important;
   }
   .fp-tableCell {
     height: auto !important;
