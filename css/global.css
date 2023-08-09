@@ -367,6 +367,34 @@ body {
 .menu__wrapper-logo {
   max-width: 300px;
   width: 68%;
+  padding: 0 5px;
+  position: relative;
+  display: inline-block; /* To ensure the pseudo-element stays within the bounds of the link */
+  overflow: hidden; /* Hide the parts of the pseudo-element that are outside the logo */
+}
+.menu__wrapper-logo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%; /* Start position, fully to the left of the logo */
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.7),
+    transparent
+  );
+  transform: skewX(-25deg); /* Gives the light ray a slanted appearance */
+  animation: lightRay 5s infinite; /* 3 seconds duration, infinite loop */
+}
+@keyframes lightRay {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 .menu__wrapper-logo img {
   width: 100%;
@@ -758,10 +786,13 @@ body {
 .content-wrapper__image img {
   width: 100%;
   height: 100%;
+  -o-object-fit: cover;
   object-fit: cover;
   transition: all 0.24s linear;
 }
 .title-link {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .title-link a {
@@ -822,6 +853,7 @@ body {
 .content-wrapper__right {
   max-width: 377px;
   width: 100%;
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
 }
@@ -889,6 +921,7 @@ body {
 .articles-item__image img {
   width: 100%;
   height: 100%;
+  -o-object-fit: cover;
   object-fit: cover;
   transition: transform 0.24s linear;
 }
@@ -944,6 +977,7 @@ body {
 .library-wrapper__image {
   width: 100%;
   height: 100%;
+  -o-object-fit: cover;
   object-fit: cover;
   transition: transform 0.24s linear;
 }
@@ -1103,16 +1137,28 @@ body {
 }
 .footer__copyright-line {
   margin: 15px 0;
-  border-top: 1px solid #fff;
+  width: 0%; /* Start width at 0 */
+  height: 1px;
+  background-color: var(--light-color);
   box-shadow: 0px 1px 1px #000000;
   opacity: 0.2;
 }
-.footer__copyright span a {
+@keyframes expandLine {
+  0% {
+    width: 0%;
+    margin-left: 50%;
+  }
+  100% {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+.footer__copyright .footer__copyright-text a {
   text-decoration: none;
   color: #a0a0a0;
   transition: color 0.2s linear;
 }
-.footer__copyright span a:hover {
+.footer__copyright .footer__copyright-text a:hover {
   color: #39dc6f;
 }
 .footer__slider {
@@ -1271,9 +1317,9 @@ body {
     grid-gap: 1.4rem;
     overflow: auto;
     overflow-y: hidden;
+    -ms-scroll-snap-type: x mandatory;
     scroll-snap-type: x mandatory;
     scroll-snap-stop: always;
-    -ms-touch-action: manipulation;
     touch-action: manipulation;
     -webkit-overflow-scrolling: touch;
     scroll-padding: 1rem;
@@ -1294,9 +1340,9 @@ body {
     grid-gap: 1.4rem;
     overflow: auto;
     overflow-y: hidden;
+    -ms-scroll-snap-type: x mandatory;
     scroll-snap-type: x mandatory;
     scroll-snap-stop: always;
-    -ms-touch-action: manipulation;
     touch-action: manipulation;
     -webkit-overflow-scrolling: touch;
     scroll-padding: 1rem;
