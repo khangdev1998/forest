@@ -21,6 +21,9 @@
   background: url("../images/footer-bg.jpg") no-repeat scroll center bottom;
   background-size: cover;
 }
+#fullpage > .section:first-child {
+  padding-top: 0 !important;  /* Sử dụng !important để đảm bảo ghi đè giá trị đã đặt từ JS */
+}
 #loader-wrapper {
   position: relative;
   top: 0;

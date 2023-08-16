@@ -147,7 +147,6 @@ $(document).ready(function () {
   $(".footer__slider").owlCarousel({
     navText: [sliderPrev, sliderNext],
     loop: true,
-    dots: false,
     margin: 20,
     nav: true,
     autoplay: true,
@@ -164,6 +163,7 @@ $(document).ready(function () {
         items: 4,
       },
       1025: {
+        dots: false,
         items: 7,
       },
     },
