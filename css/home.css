@@ -1,3 +1,6 @@
+#fullpage > .section:first-child {
+  padding-top: 0 !important; 
+}
 .section:nth-child(2) {
   background: url("../images/forest-bg.jpg") no-repeat scroll center bottom;
   background-size: cover;
@@ -21,13 +24,10 @@
   background: url("../images/footer-bg.jpg") no-repeat scroll center bottom;
   background-size: cover;
 }
-#fullpage > .section:first-child {
-  padding-top: 0 !important;  /* Sử dụng !important để đảm bảo ghi đè giá trị đã đặt từ JS */
-}
 #loader-wrapper {
   position: relative;
   top: 0;
-  height: 100vh;
+  height: 100%;
   left: 0;
   width: 100%;
   background-image: url("../images/forest-bg.jpg");
@@ -64,7 +64,7 @@
   background: transparent;
   align-items: center;
   -webkit-animation: loader-1 3s ease-in-out 0s infinite alternate;
-          animation: loader-1 3s ease-in-out 0s infinite alternate;
+  animation: loader-1 3s ease-in-out 0s infinite alternate;
 }
 .loader > span:nth-child(2) {
   width: 80%;
@@ -78,7 +78,7 @@
   background: transparent;
   transform: rotate(45deg);
   -webkit-animation: loader-2 3s ease-in-out 0s infinite alternate;
-          animation: loader-2 3s ease-in-out 0s infinite alternate;
+  animation: loader-2 3s ease-in-out 0s infinite alternate;
 }
 @-webkit-keyframes loader-1 {
   0% {
@@ -292,7 +292,7 @@
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .news__tab {
   margin: 32px 0 40px 0;
@@ -685,7 +685,7 @@
 .slider-main .item img {
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .slider-main__content,
 .slider-main__link {
@@ -871,7 +871,7 @@
 }
 .events__carousel-image img {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   height: 100%;
   transition: all 0.2s ease-in;
 }
@@ -1072,6 +1072,9 @@
   }
   .forest .button {
     margin-top: 40px;
+  }
+  .news .heading--light {
+    color: var(--primary-color);
   }
   .news__tab-item {
     font-size: 14.5px;
