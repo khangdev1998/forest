@@ -25,7 +25,7 @@
   background-size: cover;
 }
 #loader-wrapper {
-  position: relative;
+  position: fixed;
   top: 0;
   height: 100%;
   left: 0;
@@ -33,7 +33,7 @@
   background-image: url("../images/forest-bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  z-index: 9999;
+  z-index: 99999999;
   overflow: hidden;
 }
 .loader {
