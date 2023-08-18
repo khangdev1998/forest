@@ -1,17 +1,4 @@
 $(document).ready(function () {
-  window.onload = function () {
-    $("#loader-wrapper").hide();
-  };
-
-  // Handle Marquee
-  $(".marquee__main").marquee({
-    duration: 25000,
-    delayBeforeStart: 0,
-    direction: "right",
-    duplicated: true,
-    pauseOnHover: true,
-  });
-
   // Handle show video
   const video = document.getElementById("myVideo");
   const observerOptions = {
@@ -189,6 +176,18 @@ $(document).ready(function () {
     ],
     afterLoad: function (origin, destination, direction) {
       const sectionId = destination.item.id;
+      function endLoader() {
+        $("#loader-wrapper").hide();
+        $("#wrapper").fadeIn(880);
+        // Handle Marquee
+        $(".marquee__main").marquee({
+          duration: 25000,
+          delayBeforeStart: 0,
+          direction: "right",
+          duplicated: true,
+          pauseOnHover: true,
+        });
+      }
       if (
         sectionId === "section-header" &&
         !hasAnimatedHeader &&
@@ -207,11 +206,10 @@ $(document).ready(function () {
 
         window.onload = function () {
           gsap.to("#loader-wrapper", {
-            duration: 1.4, // change the duration as needed
+            duration: 1.4,
             opacity: 0,
             onComplete: function () {
-              // Hide the loader after the animation completes
-              $("#loader-wrapper").hide();
+              endLoader();
             },
           });
 
@@ -270,6 +268,10 @@ $(document).ready(function () {
       } else if (sectionId !== "section-header") {
         scrollPastHeader = true;
         fullpage_api.setAllowScrolling(true);
+      } else if (/Mobi|Android|iP(ad|hone|od)/i.test(navigator.userAgent)) {
+        window.onload = function () {
+          endLoader();
+        };
       }
 
       // Hanld Count Number
